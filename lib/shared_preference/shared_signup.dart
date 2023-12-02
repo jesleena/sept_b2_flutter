@@ -17,41 +17,37 @@ class _SharedSignupState extends State<SharedSignup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Registration page",
-          style: GoogleFonts.lato(
-            fontSize: 20,
-            color: Colors.brown,
-            fontStyle: FontStyle.italic,
-          ),
-        ),
-        backgroundColor: Colors.brown[300],
-      ),
+
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //Image.asset('assets/icon1.png', height: 100, width: 100,),
-            Text(
-              "Sign Up",
-              style: GoogleFonts.lato(
-                fontSize: 50,
-                color: Colors.brown,
-                fontStyle: FontStyle.italic,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Sign Up",
+                style: GoogleFonts.lato(
+                  fontSize: 50,
+                  color: Colors.brown,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
-            Text(
-              "create an account, its free",
-              style: GoogleFonts.lato(
-                fontSize: 20,
-                color: Colors.black,
-                fontStyle: FontStyle.italic,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "create an account, its free",
+                style: GoogleFonts.lato(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
 
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextField(style: GoogleFonts.lato(
                 fontSize: 20,
                 color: Colors.black,
@@ -64,7 +60,7 @@ class _SharedSignupState extends State<SharedSignup> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextField(style: GoogleFonts.lato(
                 fontSize: 20,
                 color: Colors.black,
@@ -78,7 +74,7 @@ class _SharedSignupState extends State<SharedSignup> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: pwd_ctrl,
                 style: GoogleFonts.lato(
@@ -107,22 +103,25 @@ class _SharedSignupState extends State<SharedSignup> {
                 textInputAction: TextInputAction.next,
               ),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  storedata();
-                },
-                child: Text(
-                  "Sign up",
-                  style: GoogleFonts.lato(
-                    fontSize: 20,
-                    color: Colors.white60,
-                    fontStyle: FontStyle.italic,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                  onPressed: () {
+                    storedata();
+                  },
+                  child: Text(
+                    "Sign up",
+                    style: GoogleFonts.lato(
+                      fontSize: 20,
+                      color: Colors.white60,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
-                ),
-                style: const ButtonStyle(
-                  backgroundColor:
-                  MaterialStatePropertyAll<Color>(Colors.brown),
-                )),
+                  style: const ButtonStyle(
+                    backgroundColor:
+                    MaterialStatePropertyAll<Color>(Colors.brown),
+                  )),
+            ),
 
           ],
         ),
