@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sept_b2_flutter/shared_preference/shared_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,7 +9,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late String username;
+  late String name;
   late SharedPreferences preferences;
 
   @override
@@ -20,7 +21,7 @@ class _HomeState extends State<Home> {
   void fetch_data() async {
     preferences = await SharedPreferences.getInstance();
     setState(() {
-      username = preferences.getString("uname")!;
+      name = preferences.getString("name")!;
     });
   }
 
@@ -28,12 +29,19 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hello $username"),
+        title:Text(
+        "Hello $name",
+        style: GoogleFonts.lato(
+          fontSize: 28,
+          color: Colors.black,
+          fontStyle: FontStyle.italic,
+        ),
+      ),
         actions: [IconButton(onPressed: () async{
           final SharedPreferences preferences = await SharedPreferences.getInstance()!;
           preferences.setBool("loggedin", false);
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>SharedLogin()));
-        }, icon: Icon(Icons.logout))],
+        }, icon: Icon(Icons.power_settings_new_rounded),color: Colors.black,)],
       ),
     );
   }

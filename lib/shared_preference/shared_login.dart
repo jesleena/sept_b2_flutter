@@ -6,6 +6,7 @@ import 'home.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: SharedLogin(),
   ));
 }
@@ -39,52 +40,95 @@ class _SharedLoginState extends State<SharedLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-      ),
+
       body: Center(
         child: Column(children: [
-          TextField(
-            controller: uname_ctrl,style: GoogleFonts.lato(
-            fontSize: 20,
-            color: Colors.black,
-            fontStyle: FontStyle.italic,),
-
-            decoration: InputDecoration(
-                hintText: "user name", border: OutlineInputBorder()),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text(
+              "Login",
+              style: GoogleFonts.lato(
+                fontSize: 50,
+                color: Colors.brown,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
           ),
-          TextField(
-            controller: pwd_ctrl,style: GoogleFonts.lato(
-            fontSize: 20,
-            color: Colors.black,
-            fontStyle: FontStyle.italic,),
-              obscureText: showpwd,
-              obscuringCharacter: '*',
+
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Text(
+              "Login with your credentials",
+              style: GoogleFonts.lato(
+                fontSize: 20,
+                color: Colors.black,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: uname_ctrl,style: GoogleFonts.lato(
+              fontSize: 20,
+              color: Colors.black,
+              fontStyle: FontStyle.italic,),
+
               decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          if (showpwd) {
-                            showpwd = false;
-                          } else {
-                            showpwd = true;
-                          }
-                        });
-                      },
-                      icon: Icon(showpwd == true
-                          ? Icons.visibility
-                          : Icons.visibility_off_sharp)),
-                  border: OutlineInputBorder(),
-                  hintText: "Password"),),
+                  hintText: "user name", border: OutlineInputBorder()),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: pwd_ctrl,style: GoogleFonts.lato(
+              fontSize: 20,
+              color: Colors.black,
+              fontStyle: FontStyle.italic,),
+                obscureText: showpwd,
+                obscuringCharacter: '*',
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            if (showpwd) {
+                              showpwd = false;
+                            } else {
+                              showpwd = true;
+                            }
+                          });
+                        },
+                        icon: Icon(showpwd == true
+                            ? Icons.visibility
+                            : Icons.visibility_off_sharp)),
+                    border: OutlineInputBorder(),
+                    hintText: "Password"),),
+          ),
 
-          ElevatedButton(
-              onPressed: ()
-              {
-                validate_login();
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+                onPressed: ()
+                {
+                  validate_login();
 
 
-              },
-              child: const Text("Login")),
+                },
+                child: Text(
+                  "Login",
+                  style: GoogleFonts.lato(
+                    fontSize: 20,
+                    color: Colors.white60,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                style: const ButtonStyle(
+                  backgroundColor:
+                  MaterialStatePropertyAll<Color>(Colors.brown),
+                )),
+          ),
+
           const SizedBox(
             height: 10,
           ),
