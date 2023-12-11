@@ -6,8 +6,8 @@ class SQLHelper {
   static Future<sql.Database> OpenDb() async {
     return sql.openDatabase('contact', version: 1,
         onCreate: (sql.Database db, int version) async {
-          await createTable(db);
-        });
+      await createTable(db);
+    });
   }
 
   //create Table
@@ -20,23 +20,27 @@ class SQLHelper {
   }
 
 // insert data to database
-  static Future<int> create_contact(String cname, String cphone) async {
+  static Future<void> createContact(String cname, String cphone) async {
     final db = await SQLHelper.OpenDb(); // to open database
     final data = {"name": cname, "phone": cphone};
-    final id = db.insert('mycontacts', data);
-    return id;
-  }
-// read all the data from db
-  static Future<List<Map<String,dynamic>>> readData() async{
-    final db = await SQLHelper.OpenDb();
-    return db.query("mycontacts",orderBy: 'id');// read all the datas by id
+    db.insert('mycontacts', data);
   }
 
-  static Future<int> updateContact(int? id, String name, String phone) async {
+  static Future<List<Map<String, dynamic>>> readData() async {
+    final db = await SQLHelper.OpenDb(); // to open database
+    return db.query('mycontacts', orderBy: 'name'); //to read data from db
+  }
+
+  static Future<void> updateContact(int? id, String cname, String cphone) async {
+    final db = await SQLHelper.OpenDb(); // to open database
+    final udata={"name": cname, "phone": cphone};
+    await db.update('mycontacts', udata,where: 'id=?',whereArgs: [id]);
+  }
+
+
+  static Future<void> deleteContact(int? id) async {
     final db = await SQLHelper.OpenDb();
-    final udata = {'name':name,'phone':phone};
-    final result = await db.update("mycontacts", udata, where: "id=?",whereArgs: [id]);
-    return result;
+      db.delete('mycontacts', where: "id=?", whereArgs: [id]);
 
   }
 }
