@@ -136,9 +136,9 @@ class _SharedSignupState extends State<SharedSignup> {
     String username = uname_ctrl.text;
     String password = pwd_ctrl.text;
     if (username != "" && password != "") {
-      preferences.setString("uname", username);
       preferences.setString("name", name);
-      preferences.setString("password", name);
+      preferences.setString("uname", username);
+      preferences.setString("password", password);
       preferences.setBool("loggedin", true);
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Home()));
     }

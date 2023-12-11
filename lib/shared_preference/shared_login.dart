@@ -156,7 +156,7 @@ class _SharedLoginState extends State<SharedLogin> {
       String password = pwd_ctrl.text;
       String? uname=preferences.getString("uname");
       String? paswd=preferences.getString("password");
-      if (username == uname && password != paswd) {
+      if (username == uname && password == paswd) {
         //preferences.setString("uname", username);
         preferences.setBool("loggedin", true);
         Navigator.of(context)
