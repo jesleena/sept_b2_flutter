@@ -15,11 +15,11 @@ class _AdminHomeState extends State<AdminHome> {
 
   ///when this page loads show all the registered users in the screen
   void initState() {
-    Refresh();
+    getAllUsers();
     super.initState();
   }
 
-  void Refresh() async {
+  void getAllUsers() async {
     var mydata = await SQLHelper.getAllDB();
 
     /// function for fetching all the values from db
@@ -30,7 +30,7 @@ class _AdminHomeState extends State<AdminHome> {
 
   void delet(int id) async {
     await SQLHelper.DeleteuserDB(id);
-    Refresh();
+    getAllUsers();
   }
 
   @override
@@ -127,6 +127,6 @@ class _AdminHomeState extends State<AdminHome> {
 
   Future<void> update(int id) async {
     await SQLHelper.updateDB(id, namecontroller.text, emailcontroller.text);
-    Refresh();
+    getAllUsers();
   }
 }

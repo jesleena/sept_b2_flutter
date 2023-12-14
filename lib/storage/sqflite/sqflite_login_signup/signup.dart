@@ -138,28 +138,33 @@ class Signup_Form extends StatelessWidget {
                           ))),
 
                   onPressed: () async {
-                     final valid1 = formkey1.currentState!.validate();
-                     if (valid1) {
-                    //   /// if form state is valid data from the textfield will upload to db
-                    //   var data = await SQLHelper.userFoundDB(conname.text, conemail.text);
-                    //
-                    //   if (data.isNotEmpty) {
-                    //     ScaffoldMessenger.of(context).showSnackBar(
-                    //         const SnackBar(content: Text('User already exist')));
-                    //   }
-                    //   else {
-                        Addnewuser(name_ctrl.text, mail_ctrl.text, pwd_ctrl.text);
-                    //   }}
-                    // else {
-                    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    //       action: SnackBarAction(label: 'UNDO', onPressed: () {}),
-                    //       content: const Text('Invalid username / password')));
-                    // }
-                  }},
+                    final valid1 = formkey1.currentState!.validate();
+                    if (valid1) {
+                      /// if form state is valid data from the textfield will upload to db
+                      var data = await SQLHelper.userFoundDB(
+                          name_ctrl.text, mail_ctrl.text);
+
+                      if (data!.isNotEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('User already exist')));
+                      }
+                      else {
+                        Addnewuser(
+                            name_ctrl.text, mail_ctrl.text, pwd_ctrl.text);
+                      }
+                    }
+                    else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          action: SnackBarAction(
+                              label: 'UNDO', onPressed: () {}),
+                          content: Text('Invalid username / password')));
+                    }
+                  },
                   child: const Text(
                     "Sign Up",
-                    style: TextStyle(color: Colors.black),
-                  )),
+                    style: TextStyle(color: Colors.black)),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
