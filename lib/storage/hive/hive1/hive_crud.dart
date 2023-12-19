@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
-void main() async{
+void main() async {
   await Hive.initFlutter();
   await Hive.openBox('todo_box');
   runApp(MaterialApp(
@@ -16,30 +16,32 @@ class Hive_Crud extends StatefulWidget {
 }
 
 class _Hive_CrudState extends State<Hive_Crud> {
-  final todo=Hive.box('todo_box');
+  final todo = Hive.box('todo_box');
   List<Map<String, dynamic>> task = [];
   final tname_ctrl = TextEditingController();
   final tcont_ctrl = TextEditingController();
-@override
+
+  @override
   void initState() {
-  read_task();
+    read_task();
     super.initState();
   }
 
   void read_task() {
-  final task_from_hive=todo.keys.map((key)//to get all map corresponding to each key
-  {
-    final single_task=todo.get(key); //values at single task corresponding tp a key
-    return{
-      'id':key,
-      'tname':single_task['task_name'],
-      'tcont':single_task['task_cont']
-    };
-
-  }).toList();
-  setState(() {
-    task=task_from_hive;
-  });
+    final task_from_hive =
+        todo.keys.map((key) //to get all map corresponding to each key
+            {
+      final single_task =
+          todo.get(key); //values at single task corresponding tp a key
+      return {
+        'id': key,
+        'tname': single_task['task_name'],
+        'tcont': single_task['task_cont']
+      };
+    }).toList();
+    setState(() {
+      task = task_from_hive.reversed.toList();
+    });
   }
 
   @override
@@ -60,8 +62,16 @@ class _Hive_CrudState extends State<Hive_Crud> {
                     subtitle: Text(task[index]['tcont']),
                     trailing: Wrap(
                       children: [
-                        IconButton(onPressed: () {create_edit_task(task[index]['id']);}, icon: Icon(Icons.edit)),
-                        IconButton(onPressed: () {}, icon: Icon(Icons.delete))
+                        IconButton(
+                            onPressed: () {
+                              create_edit_task(task[index]['id']);
+                            },
+                            icon: Icon(Icons.edit)),
+                        IconButton(
+                            onPressed: () {
+                              delete_task(task[index]['id']);
+                            },
+                            icon: Icon(Icons.delete))
                       ],
                     ),
                   ),
@@ -78,9 +88,10 @@ class _Hive_CrudState extends State<Hive_Crud> {
 
   void create_edit_task(int? itemkey) {
     if (itemkey != null) {
-      final current_task = task.firstWhere((element) => element['id']== itemkey);
-      tname_ctrl.text    = current_task['tname'];
-     tcont_ctrl.text = current_task['tcont'];
+      final current_task =
+          task.firstWhere((element) => element['id'] == itemkey);
+      tname_ctrl.text = current_task['tname'];
+      tcont_ctrl.text = current_task['tcont'];
     }
 
     showModalBottomSheet(
@@ -114,14 +125,13 @@ class _Hive_CrudState extends State<Hive_Crud> {
                         });
                       }
                       if (itemkey != null) {
-                        edit_task(itemkey,
-                            {
+                        edit_task(itemkey, {
                           "task_name": tname_ctrl.text.trim(),
                           "task_cont": tcont_ctrl.text.trim()
-                           });
+                        });
                       }
-                      tname_ctrl.text='';
-                      tcont_ctrl.text='';
+                      tname_ctrl.text = '';
+                      tcont_ctrl.text = '';
                       Navigator.pop(context);
                     },
                     child: Text(itemkey == null ? "Create task" : "Edit Task"))
@@ -132,14 +142,17 @@ class _Hive_CrudState extends State<Hive_Crud> {
   }
 
   Future<void> create_task(Map<String, String> newtask) async {
-  await todo.add(newtask);
-  read_task();
-
+    await todo.add(newtask);
+    read_task();
   }
 
-  Future<void> edit_task(int itemkey, Map<String, String> editedTask)async {
-  await todo.put(itemkey,editedTask);
-  read_task();
+  Future<void> edit_task(int itemkey, Map<String, String> editedTask) async {
+    await todo.put(itemkey, editedTask);
+    read_task();
   }
 
+  Future<void> delete_task(int itemkey) async {
+    await todo.delete(itemkey);
+    read_task();
+  }
 }
