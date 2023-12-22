@@ -5,14 +5,8 @@ import 'package:sept_b2_flutter/storage/hive/hive2/model/user_model.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:sept_b2_flutter/storage/hive/hive2/view/login_hive.dart';
 import '../database/hivedb.dart';
-void main()async{
-  WidgetsFlutterBinding.ensureInitialized();
-  Hive.initFlutter();
-  Hive.registerAdapter(UserAdapter());
-  await Hive.openBox<User>('userData');
-  runApp(GetMaterialApp(home: HiveReg(),));
 
-}
+
 class HiveReg extends StatelessWidget {
 final email_ctrl=TextEditingController();
 final pwd_ctrl=TextEditingController();
@@ -72,7 +66,7 @@ final pwd_ctrl=TextEditingController();
         }
       }
       else{
-        Get.snackbar("Error", "enter a valid email");
+        Get.snackbar("Error", "enter a valid email",colorText: Colors.red);
       }
     }
     else{
@@ -81,7 +75,7 @@ final pwd_ctrl=TextEditingController();
   }
 
  bool check_pwd(String epwd) {
-    if(epwd.length<6){Get.snackbar("Error","password length should>=6");
+    if(epwd.length<6){Get.snackbar("Error","password length should>=6",colorText: Colors.red);
     return false;}
     else return true;
  }
