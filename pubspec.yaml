@@ -46,6 +46,7 @@ dependencies:
   path_provider: ^2.1.1
   provider: ^6.1.1
   http: ^1.1.2   #api
+  cached_network_image: ^3.3.0
   #get for api
 
   # The following adds the Cupertino Icons font to your application.
