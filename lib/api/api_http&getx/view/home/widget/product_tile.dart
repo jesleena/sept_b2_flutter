@@ -17,11 +17,11 @@ child: Column(children: [
     child: CachedNetworkImage(imageUrl: product.image!,fit: BoxFit.cover,),
     ),
   ),
-SizedBox(height: 10,),
+const SizedBox(height: 10,),
 Text(product.title!,maxLines: 2,),
-SizedBox(height: 10,),
+const SizedBox(height: 10,),
 Text("${product.price}"),
-SizedBox(height: 10,),
+const SizedBox(height: 10,),
 Text("${product.rating?.rate!}")],),
       
     );
